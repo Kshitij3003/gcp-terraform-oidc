@@ -1,7 +1,7 @@
 variable "region" {
   type        = string
   description = "The region to deploy resources in"
-  default     = ""us-central-1""
+  default     = ""us-central1""
 }
 
 variable "zone" {
