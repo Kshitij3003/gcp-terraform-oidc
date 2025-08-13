@@ -1,8 +1,8 @@
-name: Terraform Deploy
+name: Terraform Dev Deploy with OIDC
 
 on:
   push:
-    branches: ["main"]
+    branches: [ "main" ]
 
 permissions:
   id-token: write
@@ -12,16 +12,16 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
 
-     steps:
+    steps:
       - name: Checkout Repo
         uses: actions/checkout@v3
 
       - name: Authenticate to GCP
         uses: google-github-actions/auth@v2
         with:
-          workload_identity_provider: "projects/914342142012/locations/global/workloadIdentityPools/github-pool/providers/github-provider"
-          service_account: "github-oidc-sa@devops-project-458912.iam.gserviceaccount.com"
-        
+          workload_identity_provider: "projects/769831191908/locations/global/workloadIdentityPools/github-pool/providers/github-provider"
+          service_account: "github-oidc-sa@amplified-brook-468711-k5.iam.gserviceaccount.com"
+
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
 
@@ -36,4 +36,3 @@ jobs:
       - name: Apply Terraform
         run: terraform apply -var-file="dev.tfvars" -auto-approve
         working-directory: envs/dev
-
